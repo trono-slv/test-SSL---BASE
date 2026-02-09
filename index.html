@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Sicurezza Lavoro - D.Lgs. 81/2008 | 30 Minuti</title>
+    <meta name="description" content="Test interattivo di sicurezza sul lavoro conforme al D.Lgs. 81/2008 - 15 domande casuali in 30 minuti">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,206 +20,833 @@
                         'arancione-chiaro': '#fbbf24'
                     },
                     animation: {
-                        'fadeIn': 'fadeIn 0.5s ease-in-out',
-                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'slideUp': 'slideUp 0.3s ease-out'
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in'
                     },
                     keyframes: {
                         fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(100%)' },
-                            '100%': { transform: 'translateY(0)' }
                         }
                     }
                 }
             }
         }
     </script>
-    <link rel="manifest" href="data:application/manifest+json,{'name':'Quiz Sicurezza Lavoro D.Lgs. 81/2008','short_name':'Sicurezza Quiz','start_url':'/','display':'standalone','background_color':'#0f0f0f','theme_color':'#dc2626','icons':[{'src':'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOTYiIGN5PSI5NiIgcj0iOTYiIGZpbGw9IiNEQzI2MjYiLz48cGF0aCBkPSJNNjAgMTIwTDgwIDEwMEw5NiAxMTZMMTMyIDgwTDE1MiAxMDBMMTIwIDE0MEw2MCAxMjBaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==','sizes':'192x192','type':'image/svg+xml'}]}">
-    <meta name="theme-color" content="#dc2626">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        * { font-family: 'Inter', sans-serif; }
-        .glass { backdrop-filter: blur(20px); background: rgba(31, 31, 31, 0.8); border: 1px solid rgba(255,255,255,0.1); }
-        .gradient-bg { background: linear-gradient(135deg, #0f0f0f 0%, #1f1f1f 50%, #dc2626 100%); }
-        .shadow-glow { box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.25); }
-        .option-hover { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-        .option-hover:hover { transform: translateX(8px); box-shadow: 0 10px 25px rgba(247, 115, 22, 0.3); }
-        @media (max-width: 640px) { .glass { backdrop-filter: blur(10px); } }
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1f1f1f 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .glass-effect {
+            background: rgba(31, 31, 31, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(107, 114, 128, 0.2);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
     </style>
 </head>
-<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
-    <!-- Header -->
-    <header class="glass sticky top-0 z-50 backdrop-blur-xl border-b-0 shadow-2xl">
-        <div class="max-w-4xl mx-auto px-6 py-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl flex items-center justify-center shadow-glow animate-pulse-slow">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">Quiz Sicurezza Lavoro</h1>
-                        <p class="text-sm text-gray-400 font-medium">D.Lgs. 81/2008 - Testo Unico</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-6 flex-wrap">
-                    <div class="flex items-center gap-2 text-sm font-medium">
-                        <div id="timer" class="text-xl font-bold text-orange-400">30:00</div>
-                        <div class="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
-                    </div>
-                    <div class="flex items-center gap-2 text-xs bg-gray-800/50 px-3 py-1 rounded-full glass">
-                        <div id="questionCounter" class="font-semibold text-orange-400">1</div>
-                        <span>/ 15</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-6 py-12 pb-24">
-        <!-- Progress Bar -->
-        <div class="w-full bg-gray-800/50 rounded-full h-2 mb-12 overflow-hidden glass">
-            <div id="progress" class="h-full bg-gradient-to-r from-orange-400 to-red-500 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
-        </div>
-
-        <!-- Quiz Container -->
-        <div id="quizContainer" class="glass rounded-3xl p-8 md:p-12 shadow-2xl shadow-red-500/10 animate-fadeIn" role="main" aria-label="Contenitore quiz">
-            <!-- Welcome Screen -->
-            <div id="welcomeScreen" class="text-center animate-fadeIn">
-                <div class="w-24 h-24 mx-auto mb-8 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-red-500/30">
-                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-4xl">
+        
+        <!-- START SCREEN -->
+        <div id="startScreen" class="glass-effect rounded-2xl p-8 md:p-12 shadow-2xl animate-fade-in">
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 bg-arancione/20 rounded-full mb-4">
+                    <svg class="w-16 h-16 text-arancione" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-6">Test di Sicurezza</h2>
-                <p class="text-xl text-gray-300 mb-8 max-w-md mx-auto leading-relaxed">15 domande casuali • 30 minuti • Avanza con un click/touch</p>
-                <button id="startQuizBtn" class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-bold py-4 px-12 rounded-2xl text-lg shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 transform hover:-translate-y-1 transition-all duration-300 inline-block">
-                    🚀 Inizia Quiz
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Quiz Sicurezza sul Lavoro</h1>
+                <p class="text-xl text-grigio-chiaro mb-6">D.Lgs. 81/2008 - Testo Unico Sicurezza</p>
+            </div>
+            
+            <div class="bg-grigio-scuro/50 rounded-xl p-6 mb-8 space-y-4">
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">📝</span>
+                    <div>
+                        <p class="text-white font-semibold">15 domande casuali</p>
+                        <p class="text-grigio-chiaro text-sm">Estratte da un database di 66 quesiti ufficiali</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">⏱️</span>
+                    <div>
+                        <p class="text-white font-semibold">30 minuti di tempo</p>
+                        <p class="text-grigio-chiaro text-sm">Timer visibile con countdown automatico</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">🎯</span>
+                    <div>
+                        <p class="text-white font-semibold">Feedback immediato</p>
+                        <p class="text-grigio-chiaro text-sm">Risposte corrette/errate evidenziate in verde/rosso</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">📊</span>
+                    <div>
+                        <p class="text-white font-semibold">Riepilogo finale dettagliato</p>
+                        <p class="text-grigio-chiaro text-sm">Con percentuale di successo e revisione domande</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="startBtn" class="w-full bg-gradient-to-r from-arancione to-arancione-chiaro text-white text-xl font-bold py-4 px-8 rounded-xl hover:shadow-2xl hover:shadow-arancione/50 transition-all duration-300">
+                🚀 Inizia il Test
+            </button>
+        </div>
+
+        <!-- QUIZ SCREEN -->
+        <div id="quizScreen" class="hidden glass-effect rounded-2xl p-6 md:p-8 shadow-2xl">
+            <!-- Header con Timer e Progresso -->
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-grigio-medio">
+                <div>
+                    <p class="text-grigio-chiaro text-sm mb-1">Domanda</p>
+                    <p class="text-white text-2xl font-bold">
+                        <span id="questionNumber">1</span>/15
+                    </p>
+                </div>
+                <div class="text-right">
+                    <p class="text-grigio-chiaro text-sm mb-1">⏱️ Tempo rimanente</p>
+                    <p id="timerDisplay" class="text-arancione text-2xl font-bold font-mono">30:00</p>
+                </div>
+            </div>
+
+            <!-- Barra Progresso -->
+            <div class="mb-6">
+                <div class="h-2 bg-grigio-scuro rounded-full overflow-hidden">
+                    <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-arancione to-arancione-chiaro" style="width: 0%"></div>
+                </div>
+                <p id="progressText" class="text-grigio-chiaro text-sm mt-2 text-center">0/15 risposte</p>
+            </div>
+
+            <!-- Domanda -->
+            <div class="mb-8">
+                <div class="bg-grigio-scuro/30 rounded-xl p-6 border-l-4 border-arancione">
+                    <p id="questionText" class="text-white text-lg leading-relaxed"></p>
+                </div>
+            </div>
+
+            <!-- Opzioni -->
+            <div id="optionsContainer" class="space-y-3"></div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="resultsScreen" class="hidden glass-effect rounded-2xl p-6 md:p-8 shadow-2xl">
+            <div class="text-center mb-8">
+                <div id="resultIcon" class="inline-block p-4 rounded-full mb-4"></div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Test Completato!</h2>
+                <p id="scoreText" class="text-xl text-grigio-chiaro mb-4"></p>
+                <div class="inline-block bg-grigio-scuro/50 rounded-xl px-6 py-3">
+                    <p id="percentageText" class="text-4xl font-bold"></p>
+                </div>
+            </div>
+
+            <!-- Riepilogo Domande -->
+            <div class="mb-6">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span>📋</span> Riepilogo Risposte
+                </h3>
+                <div id="resultsList" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
+            </div>
+
+            <!-- Pulsanti Azione -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button id="repeatQuizBtn" class="bg-grigio-scuro hover:bg-grigio-medio text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                    <span>🔄</span> Ripeti Quiz
+                </button>
+                <button id="newQuizBtn" class="bg-gradient-to-r from-arancione to-arancione-chiaro text-white font-bold py-4 px-6 rounded-xl hover:shadow-2xl hover:shadow-arancione/50 transition-all duration-300 flex items-center justify-center gap-2">
+                    <span>🎲</span> Nuovo Quiz Casuale
                 </button>
             </div>
-
-            <!-- Quiz Screen -->
-            <div id="quizScreen" class="hidden">
-                <div class="text-center mb-12">
-                    <h3 id="questionText" class="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight animate-fadeIn"></h3>
-                    <div id="optionsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto"></div>
-                </div>
-            </div>
-
-            <!-- Results Screen -->
-            <div id="resultsScreen" class="hidden animate-slideUp">
-                <div class="text-center mb-12">
-                    <div id="resultIcon" class="w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-green-500/30">
-                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h2 id="finalScore" class="text-4xl md:text-5xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-4">15/15</h2>
-                    <p id="finalMessage" class="text-2xl font-semibold text-gray-300 mb-12">Perfetto! Hai superato il test!</p>
-                </div>
-                <div id="resultsList" class="space-y-4 max-h-96 overflow-y-auto mb-12"></div>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button id="repeatQuizBtn" class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 transform hover:-translate-y-1 transition-all duration-300">
-                        🔄 Ripeti Questo Quiz
-                    </button>
-                    <button id="newQuizBtn" class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl shadow-gray-500/25 hover:shadow-gray-500/40 transform hover:-translate-y-1 transition-all duration-300">
-                        🎲 Nuovo Quiz Casuale
-                    </button>
-                </div>
-            </div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="glass border-t border-gray-800/50 mt-24">
-        <div class="max-w-4xl mx-auto px-6 py-8 text-center text-sm text-gray-500">
-            <p>Quiz basato sul <strong>D.Lgs. 81/2008</strong> - Testo Unico sulla Sicurezza sul Lavoro</p>
-            <p class="mt-1">© 2024 - App per formazione aziendale • PWA Ready</p>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // === PANIERE COMPLETO (66 domande) ===
+        // === DATABASE COMPLETO 66 DOMANDE ===
         const allQuestions = [
-            {question: "Qual è l'obiettivo principale del D.Lgs. 81/2008?", options: ["Eliminare ogni forma di lavoro manuale", "Tutelare la salute e la sicurezza dei lavoratori nei luoghi di lavoro", "Garantire un aumento di stipendio ai lavoratori a rischio", "Proteggere solo i macchinari aziendali"], correct: 1},
-            {question: "Chi è il \"Datore di Lavoro\" secondo il D.Lgs. 81/08?", options: ["Il responsabile delle risorse umane", "Il soggetto titolare del rapporto di lavoro con il lavoratore o che ha la responsabilità dell'organizzazione", "Il socio di maggioranza dell'azienda", "Il direttore dei lavori"], correct: 1},
-            {question: "Qual è la definizione corretta di \"Pericolo\" (Art. 2 D.Lgs. 81/08)?", options: ["La probabilità che accada un infortunio", "Una proprietà o qualità intrinseca di un determinato fattore avente il potenziale di causare danni", "La combinazione tra danno e probabilità", "Un evento mancato (near miss)"], correct: 1},
-            {question: "Qual è la definizione corretta di \"Rischio\"?", options: ["La certezza che accada un infortunio", "Un oggetto tagliente lasciato incustodito", "Probabilità di raggiungimento del livello potenziale di danno nelle condizioni di impiego o di esposizione", "La spesa sostenuta per la sicurezza"], correct: 2},
-            {question: "Cosa indica l'acronimo RSPP?", options: ["Rappresentante Sindacale per la Protezione", "Responsabile del Servizio di Prevenzione e Protezione", "Responsabile Sanitario del Primo Pronto soccorso", "Rappresentante della Sicurezza dei Preposti"], correct: 1},
-            {question: "Chi nomina il Medico Competente?", options: ["Il Datore di Lavoro", "L'INAIL", "Il Rappresentante dei Lavoratori per la Sicurezza (RLS)", "La ASL di competenza"], correct: 0},
-            {question: "Cosa si intende per \"DPI\"?", options: ["Dispositivi di Prevenzione Incendi", "Dispositivi di Protezione Individuale", "Documento per l'Integrità", "Disposizioni Per Infortuni"], correct: 1},
-            {question: "Secondo l'Art. 20 del D.Lgs. 81/08, il lavoratore ha l'obbligo di:", options: ["Acquistare i propri DPI", "Prendersi cura della propria salute e sicurezza e di quella delle altre persone presenti", "Delegare la sicurezza esclusivamente al Datore di Lavoro", "Modificare i macchinari per renderli più veloci"], correct: 1},
-            {question: "Il lavoratore può rimuovere o modificare senza autorizzazione i dispositivi di sicurezza?", options: ["Sì, se rallentano il lavoro", "Sì, se è esperto", "No, mai (Art. 20 D.Lgs. 81/08)", "Solo durante il turno di notte"], correct: 2},
-            {question: "Chi è l'RLS?", options: ["Il Responsabile dei Lavori Sicuri", "Il Rappresentante dei Lavoratori per la Sicurezza", "Il Responsabile Legale della Società", "Il Rappresentante del Lavoro Sindacale"], correct: 1},
-            {question: "Quando è obbligatoria la formazione sulla sicurezza per i lavoratori?", options: ["Solo in caso di infortunio", "All'assunzione, al trasferimento o cambiamento di mansioni, e all'introduzione di nuove attrezzature/tecnologie", "Solo se il lavoratore lo richiede", "Ogni 10 anni"], correct: 1},
-            {question: "Qual è il colore della segnaletica di sicurezza che indica \"Divieto\"?", options: ["Giallo", "Verde", "Rosso", "Azzurro"], correct: 2},
-            {question: "Qual è il colore della segnaletica che indica \"Obbligo\" (es. indossare caschetto)?", options: ["Rosso", "Azzurro", "Giallo", "Verde"], correct: 1},
-            {question: "Qual è il colore della segnaletica che indica \"Salvataggio/Soccorso\" (es. uscite di emergenza)?", options: ["Verde", "Rosso", "Arancione", "Bianco"], correct: 0},
-            {question: "Cosa significa \"Prevenzione\"?", options: ["Curare il lavoratore dopo l'infortunio", "L'insieme delle misure previste per evitare o diminuire i rischi professionali", "Pagare l'assicurazione INAIL", "Indossare solo il casco"], correct: 1},
-            {question: "Cosa deve fare un lavoratore se nota una condizione di pericolo immediato (es. cavo scoperto)?", options: ["Ignorarla e continuare a lavorare", "Segnalarla immediatamente al Datore di Lavoro, Dirigente o Preposto", "Tentare di ripararla da solo anche se non competente", "Scrivere una mail al sindacato"], correct: 1},
-            {question: "La Sorveglianza Sanitaria (visite mediche) è:", options: ["Facoltativa per tutti", "Obbligatoria nei casi previsti dalla normativa vigente", "A pagamento a carico del lavoratore", "Obbligatoria solo per chi ha più di 50 anni"], correct: 1},
-            {question: "Cos'è il \"near miss\" (quasi infortunio)?", options: ["Un infortunio mortale", "Un evento che avrebbe potuto causare un infortunio ma non lo ha fatto", "Un giorno di ferie", "Una sanzione disciplinare"], correct: 1},
-            {question: "Qual è il numero unico per le emergenze in Italia?", options: ["911", "112", "113", "999"], correct: 1},
-            {question: "I guanti di protezione sono:", options: ["Un dispositivo di protezione collettiva", "Un dispositivo di protezione individuale (DPI)", "Un accessorio di moda", "Facoltativi sempre"], correct: 1},
-            {question: "Cosa indica un cartello di forma triangolare con bordo nero e fondo giallo?", options: ["Obbligo", "Avvertimento / Pericolo", "Divieto", "Salvataggio"], correct: 1},
-            {question: "Qual è la principale misura di protezione contro il rischio di incendio?", options: ["Correre velocemente", "Usare gli ascensori", "Seguire le procedure di emergenza ed evacuazione", "Nascondersi sotto la scrivania"], correct: 2},
-            {question: "Il lavoratore deve sottoporsi ai controlli sanitari previsti dal Medico Competente?", options: ["No, può rifiutarsi sempre", "Sì, è un obbligo (Art. 20 D.Lgs. 81/08)", "Solo se ha sintomi", "Solo se autorizzato dall'RLS"], correct: 1},
-            {question: "Chi paga i DPI necessari per il lavoro?", options: ["Il lavoratore con trattenuta in busta paga", "Il Datore di Lavoro", "L'INAIL al 50%", "Lo Stato"], correct: 1},
-            {question: "L'uso di alcol sul luogo di lavoro:", options: ["È consentito in pausa pranzo", "È vietato, specialmente per mansioni a rischio", "È consigliato per riscaldarsi", "Non è regolamentato"], correct: 1},
-            {question: "In caso di evacuazione, cosa NON bisogna fare?", options: ["Mantenere la calma", "Seguire le vie di fuga", "Utilizzare gli ascensori", "Raggiungere il punto di raccolta"], correct: 2},
-            {question: "La segnaletica di sicurezza deve essere:", options: ["Nascosta per non rovinare l'estetica", "Visibile, chiara e conforme alla normativa", "Scritta solo in inglese", "Installata solo all'ingresso"], correct: 1},
-            {question: "Qual è il compito principale del \"Preposto\"?", options: ["Pagare gli stipendi", "Sovrintendere all'attività lavorativa e garantire l'attuazione delle direttive ricevute", "Fare le visite mediche", "Redigere il bilancio aziendale"], correct: 1},
-            {question: "Cosa si intende per \"Protezione Collettiva\"?", options: ["I guanti e le scarpe", "Sistemi che proteggono più lavoratori contemporaneamente (es. parapetti, aspiratori)", "L'assicurazione aziendale", "La riunione periodica"], correct: 1},
-            {question: "Il lavoratore in formazione è considerato:", options: ["Ospite", "Lavoratore a tutti gli effetti ai fini della sicurezza", "Stagista non tutelato", "Visitatore"], correct: 1},
-            {question: "Il Rischio Elettrico può causare:", options: ["Solo un leggero fastidio", "Elettrocuzione (scossa) e ustioni", "Danni all'udito", "Mal di schiena"], correct: 1},
-            {question: "La formazione generale dei lavoratori (Accordo Stato-Regioni) dura minimo:", options: ["2 ore", "4 ore", "8 ore", "16 ore"], correct: 1},
-            {question: "A chi deve essere inviato il lavoratore che ha subito un infortunio (dopo il primo soccorso)?", options: ["A casa a riposare", "Al Pronto Soccorso o struttura sanitaria competente per il certificato medico", "In ferie", "Dal Datore di Lavoro"], correct: 1},
-            {question: "Qual è la differenza principale tra \"Infortunio\" e \"Malattia Professionale\"?", options: ["L'infortunio avviene di notte, la malattia di giorno", "L'infortunio ha una causa violenta e immediata; la malattia professionale agisce lentamente nel tempo", "Non c'è differenza, sono sinonimi", "L'infortunio riguarda solo gli operai, la malattia solo gli impiegati"], correct: 1},
-            {question: "Il Documento di Valutazione dei Rischi (DVR):", options: ["È un documento statico che si fa una volta sola all'apertura dell'azienda", "Deve essere custodito presso l'unità produttiva e aggiornato in caso di modifiche significative al processo lavorativo o organizzativo", "Deve essere inviato ogni anno all'INAIL per approvazione", "È redatto esclusivamente dal Medico Competente"], correct: 1},
-            {question: "Cos'è il DUVRI?", options: ["Documento Unico di Valutazione dei Rischi da Interferenze", "Documento Ufficiale di Verifica Rischi Incendi", "Una certificazione ISO", "Il documento per la valutazione dello stress lavoro-correlato"], correct: 0},
-            {question: "Quando si considera un lavoratore \"videoterminalista\" (soggetto a sorveglianza specifica)?", options: ["Se usa il computer almeno 1 ora al giorno", "Se utilizza un'attrezzatura munita di videoterminale in modo sistematico o abituale, per venti ore settimanali", "Se possiede uno smartphone aziendale", "Se lavora in smart working una volta al mese"], correct: 1},
-            {question: "Nella movimentazione manuale dei carichi, qual è la tecnica corretta per sollevare un peso da terra?", options: ["Tenere le gambe tese e piegare la schiena", "Piegare le ginocchia mantenendo la schiena il più possibile dritta e il carico vicino al corpo", "Sollevare il peso con uno slancio improvviso", "Ruotare il busto mentre si solleva il peso"], correct: 1},
-            {question: "Qual è la gerarchia corretta delle misure di prevenzione?", options: ["Prima i DPI, poi le misure organizzative, infine l'eliminazione del rischio", "Eliminazione del rischio, sostituzione, misure tecniche/organizzative, mezzi di protezione collettiva, DPI", "Solo formazione e informazione", "Affidarsi completamente ai DPI"], correct: 1},
-            {question: "Cosa significa l'acronimo \"MMC\"?", options: ["Movimentazione Manuale dei Carichi", "Misure Minime di Coordinamento", "Medico Medicina Competente", "Movimento Meccanico Controllato"], correct: 0},
-            {question: "Il rischio da \"Stress Lavoro-Correlato\":", options: ["Non è un rischio riconosciuto dalla legge", "È oggetto di valutazione obbligatoria all'interno del DVR", "Riguarda solo i dirigenti", "Si risolve dando più ferie"], correct: 1},
-            {question: "Qual è la soglia di esposizione al rumore (LEX,8h) oltre la quale scatta l'obbligo per il datore di lavoro di esigere l'uso dei otoprotettori (DPI uditivi)?", options: ["60 dB(A)", "80 dB(A)", "85 dB(A)", "100 dB(A)"], correct: 2},
-            {question: "L'aggiornamento della formazione lavoratori (Accordo Stato-Regioni) ha una durata di:", options: ["6 ore ogni 5 anni", "4 ore ogni anno", "8 ore ogni 3 anni", "Non è previsto aggiornamento"], correct: 0},
-            {question: "Cosa si intende per \"contatto elettrico diretto\"?", options: ["Toccare una parte attiva dell'impianto normalmente in tensione (es. un filo scoperto)", "Toccare la carcassa di un elettrodomestico che ha un guasto interno", "Essere colpiti da un fulmine", "Usare il computer"], correct: 0},
-            {question: "Cosa si intende per \"contatto elettrico indiretto\"?", options: ["Toccare un filo scoperto", "Il contatto con una massa (es. carcassa lavatrice) che è andata in tensione a causa di un guasto all'isolamento", "Lavorare vicino a una linea alta tensione senza toccarla", "Prendere la scossa cambiando una lampadina"], correct: 1},
-            {question: "Qual è la funzione dell'interruttore differenziale (\"salvavita\")?", options: ["Proteggere l'impianto dal sovraccarico", "Proteggere le persone dai contatti indiretti interrompendo il flusso di corrente in caso di dispersione", "Risparmiare energia elettrica", "Aumentare la potenza disponibile"], correct: 1},
-            {question: "Il lavoratore può essere sanzionato penalmente?", options: ["No, solo il Datore di Lavoro è responsabile", "Sì, se viola gli obblighi dell'Art. 20 (es. rifiuto uso DPI, rimozione protezioni)", "Solo se l'azienda fallisce", "Solo se provoca un danno superiore a 100.000 euro"], correct: 1},
-            {question: "Cos'è l'\"Infortunio in itinere\"?", options: ["Un infortunio avvenuto durante la pausa caffè al bar", "Un infortunio occorso al lavoratore durante il normale percorso di andata e ritorno dal luogo di abitazione a quello di lavoro", "Un infortunio simulato", "Un infortunio avvenuto in un cantiere mobile"], correct: 1},
-            {question: "Chi firma il DVR?", options: ["Solo il Datore di Lavoro", "Datore di Lavoro, RSPP, Medico Competente (se nominato) e RLS (per presa visione)", "Tutti i lavoratori dell'azienda", "L'ispettorato del lavoro"], correct: 1},
-            {question: "I pittogrammi di pericolo sui prodotti chimici sono attualmente (Regolamento CLP):", options: ["Quadrati a fondo arancione", "Rombi a fondo bianco con cornice rossa", "Cerchi blu", "Triangoli gialli"], correct: 1},
-            {question: "Il Medico Competente può esprimere un giudizio di \"Idoneità con prescrizioni\"?", options: ["No, solo idoneo o non idoneo", "Sì, indicando limiti o condizioni per lo svolgimento della mansione (es. \"non sollevare pesi > 10kg\")", "Sì, ma solo per le lavoratrici madri", "No, decide l'INAIL"], correct: 1},
-            {question: "Le lavoratrici in stato di gravidanza:", options: ["Possono svolgere qualsiasi lavoro senza limiti", "Devono essere allontanate da lavori a rischio (chimico, biologico, fisico, carichi) previa valutazione", "Devono licenziarsi obbligatoriamente", "Devono lavorare solo di notte"], correct: 1},
-            {question: "Qual è lo scopo della \"Riunione Periodica\" (Art. 35 D.Lgs. 81/08)?", options: ["Festeggiare i risultati aziendali", "Discutere del Documento di Valutazione dei Rischi, dell'andamento infortunistico, dei DPI e della formazione", "Decidere gli aumenti di stipendio", "È una riunione facoltativa tra colleghi"], correct: 1},
-            {question: "Cosa deve fare un lavoratore che assume farmaci che riducono l'attenzione (es. psicofarmaci, antistaminici forti)?", options: ["Nulla, è un fatto privato", "Segnalarlo al Medico Competente se svolge mansioni a rischio (es. guida muletto, macchinari pericolosi)", "Smettere di lavorare per sempre", "Raddoppiare la dose di caffè"], correct: 1},
-            {question: "In caso di incendio, l'uso dell'acqua è vietato su:", options: ["Carta e cartone", "Legno", "Apparecchiature elettriche sotto tensione e oli/grassi bollenti", "Tessuti"], correct: 2},
-            {question: "La formazione specifica per i lavoratori (Rischio Basso, Medio, Alto) ha durata variabile di:", options: ["4, 8, 12 ore", "4, 8, 16 ore", "Sempre 4 ore", "8, 12, 16 ore"], correct: 0},
-            {question: "I DPI di \"Terza Categoria\" (salvavita, es. imbracature anticaduta):", options: ["Richiedono solo la consegna", "Richiedono addestramento specifico obbligatorio per il corretto utilizzo", "Possono essere usati da chiunque senza istruzioni", "Non esistono"], correct: 1},
-            {question: "Il Rappresentante dei Lavoratori per la Sicurezza (RLS) ha diritto a:", options: ["Dirigere l'azienda", "Accedere ai luoghi di lavoro in cui si svolgono le lavorazioni", "Firmare gli assegni aziendali", "Sanzionare i colleghi"], correct: 1},
-            {question: "Quale di questi è un fattore di \"microclima\"?", options: ["La polvere sul pavimento", "Temperatura, umidità, ventilazione", "Il rumore del traffico", "La luminosità dello schermo"], correct: 1},
-            {question: "Un lavoratore notturno deve essere sottoposto a controlli medici specifici?", options: ["No, mai", "Sì, periodici a cura del Medico Competente", "Solo se lo richiede", "Solo se ha più di 60 anni"], correct: 1},
-            {question: "La delega di funzioni da parte del Datore di Lavoro:", options: ["Lo esonera sempre da ogni responsabilità", "Deve essere scritta, accettata, e il delegato deve avere autonomia di spesa e competenza; non esonera dall'obbligo di vigilanza", "Può essere fatta a voce", "È vietata dalla legge"], correct: 1},
-            {question: "I rischi \"interferenti\" sono gestiti tramite:", options: ["Il DVR aziendale", "Il DUVRI (o PSC nei cantieri)", "Il contratto di assunzione", "La fattura commerciale"], correct: 1},
-            {question: "Il divieto di fumo nei luoghi di lavoro:", options: ["È una scelta del datore di lavoro", "È legge per tutelare i lavoratori dal fumo passivo e prevenire incendi", "Vale solo negli uffici aperti al pubblico", "Non si applica nei bagni"], correct: 1}
+            {
+                question: "1. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per lavoratore:",
+                options: [
+                    "A) I soci lavoratori di cooperative o di società, anche di fatto, che prestano la loro attività per conto delle società e degli enti stessi",
+                    "B) Sono equiparati i soggetti beneficiari delle iniziative di tirocini formativi e di orientamento di cui all'articolo 18 della legge 24 giugno 1997, n. 196, e di cui a specifiche disposizioni delle leggi regionali promosse al fine di realizzare momenti di alternanza tra studio e lavoro o di agevolare le scelte professionali mediante la conoscenza diretta del mondo del lavoro",
+                    "C) Persona che, indipendentemente dalla tipologia contrattuale, svolge un'attività lavorativa nell'ambito dell'organizzazione di un datore di lavoro pubblico o privato, con o senza retribuzione, anche al solo fine di apprendere un mestiere, un'arte o una professione, esclusi gli addetti ai servizi domestici e familiari",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "2. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per Datore di lavoro:",
+                options: [
+                    "A) Il soggetto titolare del rapporto di lavoro con il lavoratore o, comunque, il soggetto che, secondo il tipo e l'assetto dell'organizzazione nel cui ambito il lavoratore presta la propria attività, ha la responsabilità dell'organizzazione stessa o dell'unità produttiva in quanto esercita i poteri decisionali e di spesa",
+                    "B) Nelle pubbliche amministrazioni di cui all'articolo 1, comma 2, del decreto legislativo 30 marzo 2001, n. 165, per datore di lavoro si intende il dirigente al quale spettano i poteri di gestione, ovvero il funzionario non avente qualifica dirigenziale, nei soli casi in cui quest'ultimo sia preposto ad un ufficio avente autonomia gestionale, individuato dall'organo di vertice delle singole amministrazioni tenendo conto dell'ubicazione e dell'ambito funzionale degli uffici nei quali viene svolta l'attività, e dotato di autonomi poteri decisionali e di spesa",
+                    "C) In caso di omessa individuazione, o di individuazione non conforme ai criteri sopra indicati, il datore di lavoro coincide con l'organo di vertice medesimo",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "3. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per azienda:",
+                options: [
+                    "A) Il complesso della struttura organizzata dal datore di lavoro pubblico o privato",
+                    "B) L'unità produttiva",
+                    "C) Il lavoratore subordinato",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "4. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per unità produttiva:",
+                options: [
+                    "A) Lo stabilimento o struttura finalizzati alla produzione di beni o all'erogazione di servizi, dotati di autonomia finanziaria e tecnico funzionale",
+                    "B) Il complesso della struttura organizzata dal datore di lavoro pubblico o privato",
+                    "C) Il lavoratore subordinato",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "5. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per dirigente:",
+                options: [
+                    "A) Persona che, in ragione delle competenze professionali e nei limiti di poteri gerarchici e funzionali adeguati alla natura dell'incarico conferitogli, attua le direttive del datore di lavoro organizzando l'attività lavorativa e vigilando su di essa",
+                    "B) Persona che, in ragione delle competenze professionali e di poteri gerarchici e funzionali adeguati alla natura dell'incarico conferitogli, attua le direttive del datore di lavoro organizzando l'attività lavorativa e vigilando su di essa",
+                    "C) Il lavoratore subordinato",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 1
+            },
+            {
+                question: "6. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per preposto:",
+                options: [
+                    "A) Persona che, in ragione delle competenze professionali e nei limiti di poteri gerarchici e funzionali adeguati alla natura dell'incarico conferitogli, attua le direttive del datore di lavoro organizzando l'attività lavorativa e vigilando su di essa",
+                    "B) Persona che, in ragione delle competenze professionali e di poteri gerarchici e funzionali adeguati alla natura dell'incarico conferitogli, attua le direttive del datore di lavoro organizzando l'attività lavorativa e vigilando su di essa",
+                    "C) Il lavoratore subordinato",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "7. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per responsabile del servizio di prevenzione e protezione:",
+                options: [
+                    "A) Persona in possesso delle capacità e dei requisiti professionali di cui all'articolo 32 designata dal datore di lavoro, a cui risponde, per coordinare il servizio di prevenzione e protezione dai rischi",
+                    "B) Il lavoratore subordinato",
+                    "C) Il preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "8. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per addetto al servizio di prevenzione e protezione:",
+                options: [
+                    "A) Persona in possesso delle capacità e dei requisiti professionali di cui all'articolo 32, facente parte del servizio di prevenzione e protezione",
+                    "B) Il lavoratore subordinato",
+                    "C) Il preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "9. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per medico competente:",
+                options: [
+                    "A) Medico in possesso di uno dei titoli e dei requisiti formativi e professionali di cui all'articolo 38, che collabora, secondo quanto previsto all'articolo 29, comma 1, con il datore di lavoro ai fini della valutazione dei rischi ed è nominato dallo stesso per effettuare la sorveglianza sanitaria e per tutti gli altri compiti di cui al presente decreto",
+                    "B) Il responsabile del servizio di prevenzione e protezione",
+                    "C) Il preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "10. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per rappresentante dei lavoratori per la sicurezza:",
+                options: [
+                    "A) Persona eletta o designata per rappresentare i lavoratori per quanto concerne gli aspetti della salute e della sicurezza durante il lavoro",
+                    "B) Il medico competente",
+                    "C) Il preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "11. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per servizio di prevenzione e protezione dai rischi:",
+                options: [
+                    "A) Insieme delle persone, sistemi e mezzi esterni o interni all'azienda finalizzati all'attività di prevenzione e protezione dai rischi professionali per i lavoratori",
+                    "B) Il medico competente",
+                    "C) Il preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "12. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per sorveglianza sanitaria:",
+                options: [
+                    "A) Insieme degli atti medici, finalizzati alla tutela dello stato di salute e sicurezza dei lavoratori, in relazione all'ambiente di lavoro, ai fattori di rischio professionali e alle modalità di svolgimento dell'attività lavorativa",
+                    "B) L'attività del responsabile del servizio di prevenzione e protezione",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "13. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per prevenzione:",
+                options: [
+                    "A) Il complesso delle disposizioni o misure necessarie anche secondo la particolarità del lavoro, l'esperienza e la tecnica, per evitare o diminuire i rischi professionali nel rispetto della salute della popolazione e dell'integrità dell'ambiente esterno",
+                    "B) L'attività del responsabile del servizio di prevenzione e protezione",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "14. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per salute:",
+                options: [
+                    "A) Stato di completo benessere fisico, mentale e sociale, non consistente solo in un'assenza di malattia o d'infermità",
+                    "B) L'attività del responsabile del servizio di prevenzione e protezione",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "15. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per sistema di promozione della salute e sicurezza:",
+                options: [
+                    "A) Complesso dei soggetti istituzionali che concorrono, con la partecipazione delle parti sociali, alla realizzazione dei programmi di intervento finalizzati a migliorare le condizioni di salute e sicurezza dei lavoratori",
+                    "B) L'attività del responsabile del servizio di prevenzione e protezione",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "16. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per valutazione dei rischi:",
+                options: [
+                    "A) Valutazione globale e documentata di tutti i rischi per la salute e sicurezza dei lavoratori presenti nell'ambito dell'organizzazione in cui essi prestano la propria attività, finalizzata ad individuare le adeguate misure di prevenzione e di protezione e ad elaborare il programma delle misure atte a garantire il miglioramento nel tempo dei livelli di salute e sicurezza",
+                    "B) L'attività del responsabile del servizio di prevenzione e protezione",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "17. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per pericolo:",
+                options: [
+                    "A) Proprietà o qualità intrinseca di un determinato fattore avente il potenziale di causare danni",
+                    "B) Probabilità di raggiungimento del livello potenziale di danno nelle condizioni di impiego o di esposizione ad un determinato fattore o agente oppure alla loro combinazione",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "18. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per rischio:",
+                options: [
+                    "A) Proprietà o qualità intrinseca di un determinato fattore avente il potenziale di causare danni",
+                    "B) Probabilità di raggiungimento del livello potenziale di danno nelle condizioni di impiego o di esposizione ad un determinato fattore o agente oppure alla loro combinazione",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 1
+            },
+            {
+                question: "19. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per norma tecnica:",
+                options: [
+                    "A) Specifica tecnica, approvata e pubblicata da un'organizzazione internazionale, da un organismo europeo o da un organismo nazionale di normalizzazione, la cui osservanza non sia obbligatoria",
+                    "B) Insieme delle misure preventive da adottare per rendere innocuo o meno nocivo un potenziale fattore di rischio",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "20. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per buone prassi:",
+                options: [
+                    "A) Soluzioni organizzative o procedurali coerenti con la normativa vigente e con le norme di buona tecnica, adottate volontariamente e finalizzate a promuovere la salute e sicurezza sui luoghi di lavoro attraverso la riduzione dei rischi e il miglioramento delle condizioni di lavoro, elaborate e raccolte dalle regioni, dall'Istituto superiore per la prevenzione e la sicurezza del lavoro (ISPESL), dall'Istituto nazionale per l'assicurazione contro gli infortuni sul lavoro (INAIL) e dagli organismi paritetici di cui all'articolo 51, validate dalla Commissione consultiva permanente di cui all'articolo 6, previa istruttoria tecnica dell'ISPESL, che provvede a assicurarne la più ampia diffusione",
+                    "B) Insieme delle misure preventive da adottare per rendere innocuo o meno nocivo un potenziale fattore di rischio",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "21. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per linee guida:",
+                options: [
+                    "A) Atti di indirizzo e coordinamento per l'applicazione della normativa in materia di salute e sicurezza predisposti dai Ministeri, dalle regioni, dall'ISPESL e dall'INAIL e approvati in sede di Conferenza permanente per i rapporti tra lo Stato, le regioni e le province autonome di Trento e di Bolzano",
+                    "B) Insieme delle misure preventive da adottare per rendere innocuo o meno nocivo un potenziale fattore di rischio",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "22. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per formazione:",
+                options: [
+                    "A) Processo educativo attraverso il quale trasferire ai lavoratori ed agli altri soggetti del sistema di prevenzione e protezione aziendale conoscenze e procedure utili alla acquisizione di competenze per lo svolgimento in sicurezza dei rispettivi compiti in azienda e alla identificazione, alla riduzione e alla gestione dei rischi",
+                    "B) Insieme delle misure preventive da adottare per rendere innocuo o meno nocivo un potenziale fattore di rischio",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "23. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per informazione:",
+                options: [
+                    "A) Complesso delle attività dirette a fornire conoscenze utili alla identificazione, alla riduzione e alla gestione dei rischi in ambiente di lavoro",
+                    "B) Insieme delle misure preventive da adottare per rendere innocuo o meno nocivo un potenziale fattore di rischio",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "24. Ai fini ed agli effetti delle disposizioni di cui al D.Lgs. n. 81/2008 si intende per addestramento:",
+                options: [
+                    "A) Complesso delle attività dirette a fare apprendere ai lavoratori l'uso corretto di attrezzature, macchine, impianti, sostanze, dispositivi, anche di protezione individuale, e le procedure di lavoro",
+                    "B) Insieme delle misure preventive da adottare per rendere innocuo o meno nocivo un potenziale fattore di rischio",
+                    "C) L'attività del preposto",
+                    "D) Tutte le risposte precedenti sono errate"
+                ],
+                correct: 0
+            },
+            {
+                question: "25. In base al disposto dell'art. 17 del D.Lgs. n. 81/2008, il Datore di lavoro non può delegare le seguenti attività:",
+                options: [
+                    "A) La valutazione di tutti i rischi con la conseguente elaborazione del documento previsto dall'articolo 28",
+                    "B) La designazione del responsabile del servizio di prevenzione e protezione dai rischi",
+                    "C) Entrambe le attività indicate nelle risposte precedenti",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "26. Secondo quanto disposto dall'art. 18 del D.Lgs. n. 81/2008, tra gli obblighi del Datore di lavoro e del Dirigente rientra:",
+                options: [
+                    "A) Designare preventivamente i lavoratori incaricati dell'attuazione delle misure di prevenzione incendi e lotta antincendio, di evacuazione dei luoghi di lavoro in caso di pericolo grave e immediato, di salvataggio, di primo soccorso e, comunque, di gestione dell'emergenza",
+                    "B) Nell'affidare i compiti ai lavoratori, tenere conto delle capacità e delle condizioni degli stessi in rapporto alla loro salute e alla sicurezza",
+                    "C) Fornire ai lavoratori i necessari e idonei dispositivi di protezione individuale, sentito il responsabile del servizio di prevenzione e protezione e il medico competente, ove presente",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "27. Secondo quanto disposto dall'art. 18 del D.Lgs. n. 81/2008, tra gli obblighi del Datore di lavoro e del Dirigente rientra:",
+                options: [
+                    "A) Prendere appropriati provvedimenti per evitare che le misure tecniche adottate possano causare rischi per la salute della popolazione o deteriorare l'ambiente esterno verificando periodicamente la perdurante assenza di rischio",
+                    "B) Richiedere l'osservanza da parte dei singoli lavoratori delle norme vigenti, nonché delle disposizioni aziendali in materia di sicurezza e di igiene del lavoro e di uso dei mezzi di protezione collettivi e dei dispositivi di protezione individuali messi a loro disposizione",
+                    "C) Inviare i lavoratori alla visita medica entro le scadenze previste dal programma di sorveglianza sanitaria e richiedere al medico competente l'osservanza degli obblighi previsti a suo carico nel presente decreto",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "28. Secondo quanto disposto dall'art. 18 del D.Lgs. n. 81/2008, tra gli obblighi del Datore di lavoro e del Dirigente rientra:",
+                options: [
+                    "A) Adottare le misure per il controllo delle situazioni di rischio in caso di emergenza e dare istruzioni affinché i lavoratori, in caso di pericolo grave, immediato ed inevitabile, abbandonino il posto di lavoro o la zona pericolosa",
+                    "B) Informare il più presto possibile i lavoratori esposti al rischio di un pericolo grave e immediato circa il rischio stesso e le disposizioni prese o da prendere in materia di protezione",
+                    "C) Adempiere agli obblighi di informazione, formazione e addestramento di cui agli articoli 36 e 37 del D.Lgs. n. 81/2008",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "29. Secondo quanto disposto dall'art. 18 del D.Lgs. n. 81/2008, tra gli obblighi del Datore di lavoro e del Dirigente rientra:",
+                options: [
+                    "A) Astenersi, salvo eccezione debitamente motivata da esigenze di tutela della salute e sicurezza, dal richiedere ai lavoratori di riprendere la loro attività in una situazione di lavoro in cui persiste un pericolo grave e immediato",
+                    "B) Consentire ai lavoratori di verificare, mediante il rappresentante dei lavoratori per la sicurezza, l'applicazione delle misure di sicurezza e di protezione della salute",
+                    "C) Consegnare tempestivamente al rappresentante dei lavoratori per la sicurezza, su richiesta di questi e per l'espletamento della sua funzione, copia del documento di cui all'articolo 17, comma 1, lettera a), anche su supporto informatico come previsto dall'articolo 53, comma 5, nonché consentire al medesimo rappresentante di accedere ai dati di cui alla lettera r)",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "30. Secondo quanto disposto dall'art. 18 del D.Lgs. n. 81/2008, tra gli obblighi del Datore di lavoro e del Dirigente rientra:",
+                options: [
+                    "A) Prendere appropriati provvedimenti per evitare che le misure tecniche adottate possano causare rischi per la salute della popolazione o deteriorare l'ambiente esterno verificando periodicamente la perdurante assenza di rischio",
+                    "B) Comunicare in via telematica all'INAIL e all'IPSEMA, nonché per loro tramite, al sistema informativo nazionale per la prevenzione nei luoghi di lavoro di cui all'articolo 8, entro 48 ore dalla ricezione del certificato medico, a fini statistici e informativi, i dati e le informazioni relativi agli infortuni sul lavoro che comportino l'assenza dal lavoro di almeno un giorno, escluso quello dell'evento e, a fini assicurativi, quelli relativi agli infortuni sul lavoro che comportino un'assenza dal lavoro superiore a tre giorni",
+                    "C) Consultare il rappresentante dei lavoratori per la sicurezza nelle ipotesi di cui all'articolo 50 del D.Lgs. n. 81/2008",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "31. Secondo quanto disposto dall'art. 18 del D.Lgs. n. 81/2008, tra gli obblighi del Datore di lavoro e del Dirigente rientra:",
+                options: [
+                    "A) Adottare le misure necessarie ai fini della prevenzione incendi e dell'evacuazione dei luoghi di lavoro, nonché per il caso di pericolo grave e immediato, secondo le disposizioni di cui all'articolo 43. Tali misure devono essere adeguate alla natura dell'attività, alle dimensioni dell'azienda o dell'unità produttiva, e al numero delle persone presenti",
+                    "B) Nell'ambito dello svolgimento di attività in regime di appalto e di subappalto, munire i lavoratori di apposita tessera di riconoscimento, corredata di fotografia, contenente le generalità del lavoratore e l'indicazione del datore di lavoro",
+                    "C) Nelle unità produttive con più di 15 lavoratori, convocare la riunione periodica di cui all'articolo 35 del D.Lgs. n. 81/2008",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "32. Secondo quanto disposto dall'art. 18 del D.Lgs. n. 81/2008, tra gli obblighi del Datore di lavoro e del Dirigente rientra:",
+                options: [
+                    "A) Aggiornare le misure di prevenzione in relazione ai mutamenti organizzativi e produttivi che hanno rilevanza ai fini della salute e sicurezza del lavoro, o in relazione al grado di evoluzione della tecnica della prevenzione e della protezione",
+                    "B) Comunicare in via telematica all'INAIL e all'IPSEMA, nonché per loro tramite, al sistema informativo nazionale per la prevenzione nei luoghi di lavoro di cui all'articolo 8, in caso di nuova elezione o designazione, i nominativi dei rappresentanti dei lavoratori per la sicurezza; in fase di prima applicazione l'obbligo di cui alla presente lettera riguarda i nominativi dei rappresentanti dei lavoratori già eletti o designati",
+                    "C) Vigilare affinché i lavoratori per i quali vige l'obbligo di sorveglianza sanitaria non siano adibiti alla mansione lavorativa specifica senza il prescritto giudizio di idoneità",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "33. Il documento di valutazione dei rischi di cui all'art. 17, comma 1, lett. a) del D.Lgs. n. 81/2008:",
+                options: [
+                    "A) Deve essere custodito presso l'unità produttiva alla quale si riferisce la valutazione dei rischi",
+                    "B) Può essere tenuto, nel rispetto delle previsioni di cui all'articolo 53, su supporto informatico",
+                    "C) Deve essere munito di data certa o attestata dalla sottoscrizione del documento medesimo da parte del datore di lavoro, nonché, ai soli fini della prova della data, dalla sottoscrizione del responsabile del servizio di prevenzione e protezione, del rappresentante dei lavoratori per la sicurezza o del rappresentante dei lavoratori per la sicurezza territoriale e del medico competente, ove nominato",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "34. Il Datore di lavoro può delegare le funzioni di cui all'art. 17 del D.Lgs. n. 81/2008?",
+                options: [
+                    "A) Sì, sempre",
+                    "B) No, mai",
+                    "C) Solo se lo prevede il contratto collettivo",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 1
+            },
+            {
+                question: "35. Il Datore di lavoro che esercita le attività di cui all'art. 3 del decreto legislativo 8 luglio 2003, n. 235 può delegare le funzioni di cui all'art. 17 del D.Lgs. n. 81/2008?",
+                options: [
+                    "A) Sì, sempre",
+                    "B) No, mai",
+                    "C) Sì, ma solo con atto scritto avente data certa",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "36. In base al disposto dell'art. 28 del D.Lgs. n. 81/2008, la valutazione dei rischi deve riguardare:",
+                options: [
+                    "A) Tutti i rischi per la sicurezza e la salute dei lavoratori, ivi compresi quelli riguardanti gruppi di lavoratori esposti a rischi particolari, tra cui anche quelli collegati allo stress lavoro-correlato, secondo i contenuti dell'accordo europeo dell'8 ottobre 2004, e quelli riguardanti le lavoratrici in stato di gravidanza, secondo quanto previsto dal decreto legislativo 26 marzo 2001, n. 151, nonché quelli connessi alle differenze di genere, all'età, alla provenienza da altri Paesi e quelli connessi alla specifica tipologia contrattuale attraverso cui viene resa la prestazione di lavoro",
+                    "B) Solo i rischi per la sicurezza dei lavoratori",
+                    "C) Solo i rischi per la salute dei lavoratori",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            },
+            {
+                question: "37. In base al disposto dell'art. 28 del D.Lgs. n. 81/2008, il documento di valutazione dei rischi deve contenere:",
+                options: [
+                    "A) Una relazione sulla valutazione di tutti i rischi per la sicurezza e la salute durante l'attività lavorativa, nella quale siano specificati i criteri adottati per la valutazione stessa",
+                    "B) L'indicazione delle misure di prevenzione e di protezione attuate e dei dispositivi di protezione individuali adottati, a seguito della valutazione di cui all'articolo 17, comma 1, lettera a)",
+                    "C) Il programma delle misure ritenute opportune per garantire il miglioramento nel tempo dei livelli di sicurezza",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "38. In base al disposto dell'art. 28 del D.Lgs. n. 81/2008, il documento di valutazione dei rischi deve contenere:",
+                options: [
+                    "A) L'individuazione delle procedure per l'attuazione delle misure da realizzare, nonché dei ruoli dell'organizzazione aziendale che vi debbono provvedere, a cui devono essere assegnati unicamente soggetti in possesso di adeguate competenze e poteri",
+                    "B) L'indicazione del nominativo del responsabile del servizio di prevenzione e protezione, del rappresentante dei lavoratori per la sicurezza o di quello territoriale e del medico competente che ha partecipato alla valutazione del rischio",
+                    "C) L'individuazione delle mansioni che eventualmente espongono i lavoratori a rischi specifici che richiedono una riconosciuta capacità professionale, specifica esperienza, adeguata formazione e addestramento",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "39. In base al disposto dell'art. 29 del D.Lgs. n. 81/2008, la valutazione dei rischi deve essere effettuata:",
+                options: [
+                    "A) Dal Datore di lavoro in collaborazione con il responsabile del servizio di prevenzione e protezione e il medico competente, nei casi di cui all'articolo 41",
+                    "B) Dal Datore di lavoro previa consultazione del rappresentante dei lavoratori per la sicurezza",
+                    "C) Entrambe le risposte precedenti sono esatte",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "40. In base al disposto dell'art. 29 del D.Lgs. n. 81/2008, il Datore di lavoro effettua la valutazione dei rischi ed elabora il documento di cui all'articolo 17, comma 1, lettera a):",
+                options: [
+                    "A) In occasione di modifiche del processo produttivo o della organizzazione del lavoro significative ai fini della salute e sicurezza dei lavoratori",
+                    "B) In relazione al grado di evoluzione della tecnica, della prevenzione o della protezione",
+                    "C) A seguito di infortuni significativi o quando i risultati della sorveglianza sanitaria ne evidenzino la necessità",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "41. Ai sensi dell'art. 29 del D.Lgs. n. 81/2008, nelle imprese fino a 10 lavoratori, quale termine, dalla data di entrata in vigore del presente decreto legislativo, è previsto per effettuare la valutazione dei rischi?",
+                options: [
+                    "A) Novanta giorni",
+                    "B) Centottanta giorni",
+                    "C) Duecentodieci giorni",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "42. Ai sensi dell'art. 29 del D.Lgs. n. 81/2008, nelle imprese che occupano fino a 50 lavoratori, quale termine, dalla data di entrata in vigore del presente decreto legislativo, è previsto per effettuare la valutazione dei rischi?",
+                options: [
+                    "A) Novanta giorni",
+                    "B) Centottanta giorni",
+                    "C) Duecentodieci giorni",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 1
+            },
+            {
+                question: "43. Ai sensi dell'art. 29 del D.Lgs. n. 81/2008, nelle imprese che occupano più di 50 lavoratori, quale termine, dalla data di entrata in vigore del presente decreto legislativo, è previsto per effettuare la valutazione dei rischi?",
+                options: [
+                    "A) Novanta giorni",
+                    "B) Centottanta giorni",
+                    "C) Duecentodieci giorni",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            },
+            {
+                question: "44. Secondo quanto disposto dall'art. 19 del D.Lgs. n. 81/2008, tra gli obblighi del Preposto rientra:",
+                options: [
+                    "A) Sovrintendere e vigilare sulla osservanza da parte dei singoli lavoratori dei loro obblighi di legge, nonché delle disposizioni aziendali in materia di salute e sicurezza sul lavoro e di uso dei mezzi di protezione collettivi e dei dispositivi di protezione individuale messi a loro disposizione e, in caso di persistenza della inosservanza, informare i loro superiori diretti",
+                    "B) Verificare affinché soltanto i lavoratori che hanno ricevuto adeguate istruzioni accedano alle zone che li espongono ad un rischio grave e specifico",
+                    "C) Richiedere l'osservanza delle misure per il controllo delle situazioni di rischio in caso di emergenza e dare istruzioni affinché i lavoratori, in caso di pericolo grave, immediato e inevitabile, abbandonino il posto di lavoro o la zona pericolosa",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "45. Secondo quanto disposto dall'art. 19 del D.Lgs. n. 81/2008, tra gli obblighi del Preposto rientra:",
+                options: [
+                    "A) Informare il più presto possibile i lavoratori esposti al rischio di un pericolo grave e immediato circa il rischio stesso e le disposizioni prese o da prendere in materia di protezione",
+                    "B) Astenersi, salvo eccezioni debitamente motivate, dal richiedere ai lavoratori di riprendere la loro attività in una situazione di lavoro in cui persiste un pericolo grave ed immediato",
+                    "C) Segnalare tempestivamente al datore di lavoro o al dirigente sia le deficienze dei mezzi e delle attrezzature di lavoro e dei dispositivi di protezione individuale, sia ogni altra condizione di pericolo che si verifichi durante il lavoro, delle quali venga a conoscenza sulla base della formazione ricevuta",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "46. Secondo quanto disposto dall'art. 19 del D.Lgs. n. 81/2008, tra gli obblighi del Preposto rientra:",
+                options: [
+                    "A) Frequentare appositi corsi di formazione secondo quanto previsto dall'articolo 37 del D.Lgs. n. 81/2008",
+                    "B) Segnalare tempestivamente al datore di lavoro o al dirigente sia le deficienze dei mezzi e delle attrezzature di lavoro e dei dispositivi di protezione individuale, sia ogni altra condizione di pericolo che si verifichi durante il lavoro, delle quali venga a conoscenza sulla base della formazione ricevuta",
+                    "C) Astenersi, salvo eccezioni debitamente motivate, dal richiedere ai lavoratori di riprendere la loro attività in una situazione di lavoro in cui persiste un pericolo grave ed immediato",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "47. Secondo quanto disposto dall'art. 20 del D.Lgs. n. 81/2008, tra gli obblighi dei Lavoratori rientra:",
+                options: [
+                    "A) Contribuire, insieme al datore di lavoro, ai dirigenti e ai preposti, all'adempimento degli obblighi previsti a tutela della salute e sicurezza sui luoghi di lavoro",
+                    "B) Osservare le disposizioni e le istruzioni impartite dal datore di lavoro, dai dirigenti e dai preposti, ai fini della protezione collettiva ed individuale",
+                    "C) Utilizzare correttamente le attrezzature di lavoro, le sostanze e i preparati pericolosi, i mezzi di trasporto e, nonché i dispositivi di sicurezza",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "48. Secondo quanto disposto dall'art. 20 del D.Lgs. n. 81/2008, tra gli obblighi dei Lavoratori rientra:",
+                options: [
+                    "A) Utilizzare in modo appropriato i dispositivi di protezione messi a loro disposizione",
+                    "B) Segnalare immediatamente al datore di lavoro, al dirigente o al preposto le deficienze dei mezzi e dei dispositivi di cui alle lettere c) e d), nonché qualsiasi eventuale condizione di pericolo di cui vengano a conoscenza, adoperandosi direttamente, in caso di urgenza, nell'ambito delle proprie competenze e possibilità e fatto salvo l'obbligo di cui alla lettera f) per eliminare o ridurre le situazioni di pericolo grave e incombente, dandone notizia al rappresentante dei lavoratori per la sicurezza",
+                    "C) Non rimuovere o modificare senza autorizzazione i dispositivi di sicurezza o di segnalazione o di controllo",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "49. Secondo quanto disposto dall'art. 20 del D.Lgs. n. 81/2008, tra gli obblighi dei Lavoratori rientra:",
+                options: [
+                    "A) Non compiere di propria iniziativa operazioni o manovre che non sono di loro competenza ovvero che possono compromettere la sicurezza propria o di altri lavoratori",
+                    "B) Partecipare ai programmi di formazione e di addestramento organizzati dal datore di lavoro",
+                    "C) Sottoporsi ai controlli sanitari previsti dal presente decreto legislativo o comunque disposti dal medico competente",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "50. In base al disposto dell'art. 36 del D.Lgs. n. 81/2008, ciascun lavoratore deve ricevere una adeguata informazione su:",
+                options: [
+                    "A) I rischi per la salute e sicurezza sul lavoro connessi alla attività della impresa in generale",
+                    "B) Le procedure che riguardano il primo soccorso, la lotta antincendio, l'evacuazione dei luoghi di lavoro",
+                    "C) I nominativi dei lavoratori incaricati di applicare le misure di cui agli articoli 45 e 46 del D.Lgs. n. 81/2008",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "51. In base al disposto dell'art. 36 del D.Lgs. n. 81/2008, ciascun lavoratore deve ricevere una adeguata informazione su:",
+                options: [
+                    "A) I rischi specifici cui è esposto in relazione all'attività svolta, le normative di sicurezza e le disposizioni aziendali in materia",
+                    "B) I pericoli connessi all'uso delle sostanze e dei preparati pericolosi sulla base delle schede dei dati di sicurezza previste dalla normativa vigente e dalle norme di buona tecnica",
+                    "C) Le misure e le attività di protezione e prevenzione adottate",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "52. In base al disposto dell'art. 36 del D.Lgs. n. 81/2008, il contenuto della informazione deve essere facilmente comprensibile per i lavoratori e deve consentire loro di acquisire le relative conoscenze. Ove la informazione riguardi lavoratori immigrati, essa avviene previa verifica della comprensione della lingua utilizzata nel percorso informativo?",
+                options: [
+                    "A) Sì, sempre",
+                    "B) No, mai",
+                    "C) Solo se il lavoratore è extracomunitario",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            },
+            {
+                question: "53. In base al disposto dell'art. 37 del D.Lgs. n. 81/2008, il Datore di lavoro assicura che ciascun lavoratore riceva una formazione sufficiente ed adeguata in materia di salute e sicurezza, anche rispetto alle conoscenze linguistiche, con particolare riferimento a:",
+                options: [
+                    "A) Concetti di rischio, danno, prevenzione, protezione, organizzazione della prevenzione aziendale, diritti e doveri dei vari soggetti aziendali, organi di vigilanza, controllo, assistenza",
+                    "B) Rischi riferiti alle mansioni e ai possibili danni e alle conseguenti misure e procedure di prevenzione e protezione caratteristici del settore o comparto di appartenenza dell'azienda",
+                    "C) Entrambe le risposte precedenti sono esatte",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "54. In base al disposto dell'art. 37 del D.Lgs. n. 81/2008, la formazione e, ove previsto, l'addestramento specifico devono avvenire:",
+                options: [
+                    "A) In occasione della costituzione del rapporto di lavoro o dell'inizio dell'utilizzazione qualora si tratti di somministrazione di lavoro",
+                    "B) In occasione del trasferimento o cambiamento di mansioni",
+                    "C) In occasione della introduzione di nuove attrezzature di lavoro o di nuove tecnologie, di nuove sostanze e preparati pericolosi",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "55. In base al disposto dell'art. 37 del D.Lgs. n. 81/2008, l'addestramento viene effettuato:",
+                options: [
+                    "A) Da persona esperta e sul luogo di lavoro",
+                    "B) Da persona esperta anche in luogo diverso dal luogo di lavoro",
+                    "C) In ogni caso sul luogo di lavoro",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            },
+            {
+                question: "56. In base al disposto dell'art. 37 del D.Lgs. n. 81/2008, la formazione dei lavoratori e dei loro rappresentanti deve essere periodicamente ripetuta in relazione all'evoluzione dei rischi o all'insorgenza di nuovi rischi?",
+                options: [
+                    "A) Sì, sempre",
+                    "B) No, mai",
+                    "C) Solo se il lavoratore è extracomunitario",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            },
+            {
+                question: "57. In base al disposto dell'art. 41 del D.Lgs. n. 81/2008, la sorveglianza sanitaria è effettuata dal medico competente:",
+                options: [
+                    "A) Nei casi previsti dalla normativa vigente, dalle indicazioni fornite dalla Commissione consultiva di cui all'articolo 6",
+                    "B) Qualora il lavoratore ne faccia richiesta e la stessa sia ritenuta dal medico competente correlata ai rischi lavorativi",
+                    "C) Entrambe le risposte precedenti sono esatte",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "58. In base al disposto dell'art. 41 del D.Lgs. n. 81/2008, la sorveglianza sanitaria comprende:",
+                options: [
+                    "A) Visita medica preventiva intesa a constatare l'assenza di controindicazioni al lavoro cui il lavoratore è destinato al fine di valutare la sua idoneità alla mansione specifica",
+                    "B) Visita medica periodica per controllare lo stato di salute dei lavoratori ed esprimere il giudizio di idoneità alla mansione specifica. La periodicità di tali accertamenti, qualora non prevista dalla relativa normativa, viene stabilita, di norma, in una volta l'anno. Tale periodicità può assumere cadenza diversa, stabilita dal medico competente in funzione della valutazione del rischio. L'organo di vigilanza, con provvedimento motivato, può disporre contenuti e periodicità della sorveglianza sanitaria differenti rispetto a quelli indicati dal medico competente",
+                    "C) Visita medica su richiesta del lavoratore, qualora sia ritenuta dal medico competente correlata ai rischi professionali o alle sue condizioni di salute, suscettibili di peggioramento a causa dell'attività lavorativa svolta, al fine di esprimere il giudizio di idoneità alla mansione specifica",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "59. In base al disposto dell'art. 41 del D.Lgs. n. 81/2008, la sorveglianza sanitaria comprende:",
+                options: [
+                    "A) Visita medica in occasione del cambio della mansione onde verificare l'idoneità alla mansione specifica",
+                    "B) Visita medica alla cessazione del rapporto di lavoro nei casi previsti dalla normativa vigente",
+                    "C) Visita medica preventiva in fase preassuntiva",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "60. In base al disposto dell'art. 41 del D.Lgs. n. 81/2008, le visite mediche di cui all'articolo 41, comma 2, non possono essere effettuate:",
+                options: [
+                    "A) Per accertare stati di gravidanza",
+                    "B) Negli altri casi vietati dalla normativa vigente",
+                    "C) Entrambe le risposte precedenti sono esatte",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "61. In base al disposto dell'art. 42 del D.Lgs. n. 81/2008, gli esiti della visita medica devono essere allegati alla cartella sanitaria e di rischio di cui all'articolo 25, comma 1, lettera c) secondo i requisiti minimi contenuti nell'Allegato 3A e predisposta su formato cartaceo o informatizzato, secondo quanto previsto dall'articolo 53. Il medico competente, sulla base delle risultanze delle visite mediche di cui all'articolo 41, esprime uno dei seguenti giudizi relativi alla mansione specifica:",
+                options: [
+                    "A) Idoneità",
+                    "B) Idoneità parziale, temporanea o permanente, con prescrizioni o limitazioni",
+                    "C) Inidoneità temporanea o inidoneità permanente",
+                    "D) Tutte le risposte sono esatte"
+                ],
+                correct: 3
+            },
+            {
+                question: "62. In base al disposto dell'art. 43 del D.Lgs. n. 81/2008, il Datore di lavoro, anche tramite il medico competente, informa ogni lavoratore interessato:",
+                options: [
+                    "A) Dei risultati della sorveglianza sanitaria di cui all'articolo 41",
+                    "B) Della possibilità di chiedere, in caso di inidoneità alla mansione specifica, di essere sottoposto a visita medica da parte di enti pubblici del Servizio sanitario nazionale, che si pronunciano entro trenta giorni dalla ricezione della domanda sull'idoneità del lavoratore alla mansione specifica",
+                    "C) Entrambe le risposte precedenti sono esatte",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 2
+            },
+            {
+                question: "63. In base al disposto dell'art. 44 del D.Lgs. n. 81/2008, qualora il lavoratore, a seguito della sorveglianza sanitaria di cui all'articolo 41, risulti non idoneo alla mansione specifica, il Datore di lavoro:",
+                options: [
+                    "A) Lo allontana dal luogo di lavoro",
+                    "B) Lo adibisce, ove possibile, a mansioni equivalenti o, in difetto, a mansioni inferiori garantendo il trattamento corrispondente alle mansioni di provenienza",
+                    "C) Lo licenzia",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 1
+            },
+            {
+                question: "64. In base al disposto dell'art. 45 del D.Lgs. n. 81/2008, il Datore di lavoro, tenendo conto della natura della attività e delle dimensioni della organizzazione e delle aziende o della unità produttive, sentito il medico competente ove nominato, prende i provvedimenti necessari in materia di primo soccorso e di assistenza medica di emergenza?",
+                options: [
+                    "A) Sì, sempre",
+                    "B) No, mai",
+                    "C) Solo nelle aziende con più di 50 dipendenti",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            },
+            {
+                question: "65. In base al disposto dell'art. 46 del D.Lgs. n. 81/2008, il Datore di lavoro designa preventivamente i lavoratori incaricati dell'attuazione delle misure di prevenzione incendi e lotta antincendio, di evacuazione dei luoghi di lavoro in caso di pericolo grave e immediato, di salvataggio, di primo soccorso e, comunque, di gestione dell'emergenza?",
+                options: [
+                    "A) Sì, sempre",
+                    "B) No, mai",
+                    "C) Solo nelle aziende con più di 50 dipendenti",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            },
+            {
+                question: "66. In base al disposto dell'art. 46 del D.Lgs. n. 81/2008, i lavoratori non possono, se non per giustificato motivo, rifiutare la designazione. Essi devono essere formati, essere in numero sufficiente e disporre di attrezzature adeguate, tenendo conto delle dimensioni e dei rischi specifici dell'azienda o della unità produttiva?",
+                options: [
+                    "A) Sì, sempre",
+                    "B) No, mai",
+                    "C) Solo nelle aziende con più di 50 dipendenti",
+                    "D) Nessuna delle risposte precedenti è esatta"
+                ],
+                correct: 0
+            }
         ];
 
         // === VARIABILI GLOBALI ===
         let selectedQuestions = [];
-        let currentQuestion = 0;
+        let currentQuestionIndex = 0;
         let userAnswers = [];
+        let timer;
         let timeRemaining = 1800; // 30 minuti in secondi
-        let timerInterval;
+        let isQuizActive = false;
 
-        // === FUNZIONI CORE ===
+        // === FUNZIONI UTILITY ===
         function shuffleArray(array) {
             const shuffled = [...array];
             for (let i = shuffled.length - 1; i > 0; i--) {
@@ -232,167 +860,196 @@
             const shuffled = shuffleArray(allQuestions);
             return shuffled.slice(0, 15).map(q => ({
                 ...q,
-                shuffledOptions: shuffleArray(q.options.map((opt, idx) => ({text: opt, originalIndex: idx})))
+                options: shuffleArray(q.options.map((opt, idx) => ({ text: opt, originalIndex: idx })))
             }));
         }
 
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // === TIMER ===
         function startTimer() {
-            timerInterval = setInterval(() => {
+            isQuizActive = true;
+            timer = setInterval(() => {
                 timeRemaining--;
-                updateTimerDisplay();
+                document.getElementById('timerDisplay').textContent = formatTime(timeRemaining);
+                
+                if (timeRemaining <= 300) { // Ultimi 5 minuti
+                    document.getElementById('timerDisplay').classList.add('text-rosso', 'animate-pulse');
+                }
                 
                 if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
+                    clearInterval(timer);
                     endQuiz();
                 }
             }, 1000);
         }
 
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            document.getElementById('timer').textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            if (timeRemaining < 300) {
-                document.getElementById('timer').classList.add('text-red-500', 'animate-pulse');
-            }
+        function stopTimer() {
+            isQuizActive = false;
+            clearInterval(timer);
         }
 
-        function updateProgressBar() {
-            const progress = ((currentQuestion + 1) / 15) * 100;
-            document.getElementById('progress').style.width = `${progress}%`;
-        }
-
+        // === DISPLAY DOMANDA ===
         function displayQuestion() {
-            const q = selectedQuestions[currentQuestion];
-            document.getElementById('questionText').textContent = q.question;
-            document.getElementById('questionCounter').textContent = currentQuestion + 1;
+            const question = selectedQuestions[currentQuestionIndex];
+            
+            document.getElementById('questionNumber').textContent = currentQuestionIndex + 1;
+            document.getElementById('questionText').textContent = question.question;
             
             const optionsContainer = document.getElementById('optionsContainer');
             optionsContainer.innerHTML = '';
             
-            q.shuffledOptions.forEach((option, idx) => {
+            question.options.forEach((option, index) => {
                 const button = document.createElement('button');
-                button.className = 'glass option-hover p-6 rounded-2xl text-left text-lg font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-500/50 hover:bg-gray-700/50';
-                button.setAttribute('role', 'button');
-                button.setAttribute('aria-label', `Opzione ${idx + 1}: ${option.text}`);
-                
-                button.innerHTML = `<span class="text-orange-400 font-bold mr-3">${String.fromCharCode(65 + idx)}</span> ${option.text}`;
-                
-                if (userAnswers[currentQuestion] === null) {
-                    button.onclick = () => selectAnswer(option.originalIndex);
-                }
-                
-                optionsContainer.appendChild(button);
-            });
-            
-            updateProgressBar();
-        }
-
-        function selectAnswer(answerIndex) {
-            userAnswers[currentQuestion] = answerIndex;
-            
-            setTimeout(() => {
-                nextQuestion();
-            }, 500);
-        }
-
-        function nextQuestion() {
-            if (currentQuestion < 14) {
-                currentQuestion++;
-                displayQuestion();
-            } else {
-                endQuiz();
-            }
-        }
-
-        function endQuiz() {
-            clearInterval(timerInterval); // ✅ FIX: Ferma timer
-            
-            const correctAnswers = userAnswers.filter((answer, idx) => 
-                answer === selectedQuestions[idx].correct
-            ).length;
-            
-            document.getElementById('quizScreen').classList.add('hidden');
-            document.getElementById('resultsScreen').classList.remove('hidden');
-            
-            const scoreElement = document.getElementById('finalScore');
-            const messageElement = document.getElementById('finalMessage');
-            const iconElement = document.getElementById('resultIcon');
-            
-            scoreElement.textContent = `${correctAnswers}/15`;
-            
-            if (correctAnswers >= 14) {
-                messageElement.textContent = '🎉 Eccellente! Sicurezza al top!';
-                scoreElement.className = 'text-4xl md:text-5xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-4';
-                iconElement.className = 'w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-green-500/30';
-            } else if (correctAnswers >= 12) {
-                messageElement.textContent = '✅ Ottimo lavoro! Quasi perfetto!';
-                scoreElement.className = 'text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4';
-                iconElement.className = 'w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/30';
-            } else if (correctAnswers >= 10) {
-                messageElement.textContent = '⚠️ Buono, ma rivedi alcuni concetti';
-                scoreElement.className = 'text-4xl md:text-5xl font-black bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent mb-4';
-                iconElement.className = 'w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-yellow-500/30';
-            } else {
-                messageElement.textContent = '❌ Attenzione! Necessaria più formazione';
-                scoreElement.className = 'text-4xl md:text-5xl font-black bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-4';
-                iconElement.className = 'w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-red-500 to-red-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-red-500/30';
-            }
-            
-            displayResults();
-        }
-
-        function displayResults() {
-            const resultsList = document.getElementById('resultsList');
-            resultsList.innerHTML = '';
-            
-            selectedQuestions.forEach((q, idx) => {
-                const userAnswer = userAnswers[idx];
-                const isCorrect = userAnswer === q.correct;
-                
-                const resultCard = document.createElement('div');
-                resultCard.className = `glass p-6 rounded-2xl ${isCorrect ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'}`;
-                
-                resultCard.innerHTML = `
-                    <div class="flex items-start gap-3 mb-3">
-                        <div class="w-8 h-8 rounded-lg ${isCorrect ? 'bg-green-500' : 'bg-red-500'} flex items-center justify-center flex-shrink-0">
-                            ${isCorrect ? 
-                                '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>' :
-                                '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>'
-                            }
-                        </div>
-                        <div class="flex-1">
-                            <p class="font-semibold text-white mb-2">${idx + 1}. ${q.question}</p>
-                            <div class="space-y-2 text-sm">
-                                <p class="${isCorrect ? 'text-green-400' : 'text-red-400'} font-medium">
-                                    La tua risposta: ${userAnswer !== null ? q.options[userAnswer] : 'Non risposto'}
-                                </p>
-                                ${!isCorrect ? `<p class="text-green-400 font-medium">Risposta corretta: ${q.options[q.correct]}</p>` : ''}
-                            </div>
-                        </div>
+                button.className = 'w-full text-left p-4 rounded-xl border-2 border-grigio-medio bg-grigio-scuro/30 hover:bg-grigio-scuro hover:border-arancione transition-all duration-300 text-white';
+                button.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-grigio-medio flex items-center justify-center font-bold text-sm">
+                            ${String.fromCharCode(65 + index)}
+                        </span>
+                        <span class="flex-1">${option.text}</span>
                     </div>
                 `;
                 
-                resultsList.appendChild(resultCard);
+                button.addEventListener('click', () => selectAnswer(option.originalIndex));
+                optionsContainer.appendChild(button);
             });
+            
+            updateProgress();
         }
 
+        // === SELEZIONE RISPOSTA ===
+        function selectAnswer(answerIndex) {
+            if (!isQuizActive) return;
+            
+            userAnswers[currentQuestionIndex] = answerIndex;
+            
+            // Evidenzia risposta selezionata
+            const buttons = document.querySelectorAll('#optionsContainer button');
+            buttons.forEach((btn, idx) => {
+                btn.classList.remove('border-arancione', 'bg-arancione/20');
+                if (selectedQuestions[currentQuestionIndex].options[idx].originalIndex === answerIndex) {
+                    btn.classList.add('border-arancione', 'bg-arancione/20');
+                }
+            });
+            
+            updateProgress();
+            
+            // Passa automaticamente alla prossima domanda dopo 500ms
+            setTimeout(() => {
+                if (currentQuestionIndex < selectedQuestions.length - 1) {
+                    currentQuestionIndex++;
+                    displayQuestion();
+                } else {
+                    endQuiz();
+                }
+            }, 500);
+        }
+
+        // === AGGIORNA PROGRESSO ===
+        function updateProgress() {
+            const answered = userAnswers.filter(a => a !== undefined).length;
+            const percentage = (answered / selectedQuestions.length) * 100;
+            
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            document.getElementById('progressText').textContent = `${answered}/${selectedQuestions.length} risposte`;
+        }
+
+        // === FINE QUIZ ===
+        function endQuiz() {
+            stopTimer();
+            
+            let correctAnswers = 0;
+            const results = selectedQuestions.map((q, idx) => {
+                const userAnswer = userAnswers[idx];
+                const isCorrect = userAnswer === q.correct;
+                if (isCorrect) correctAnswers++;
+                
+                return {
+                    question: q.question,
+                    userAnswer: userAnswer !== undefined ? q.options.find(opt => opt.originalIndex === userAnswer)?.text : 'Non risposta',
+                    correctAnswer: q.options.find(opt => opt.originalIndex === q.correct)?.text,
+                    isCorrect: isCorrect
+                };
+            });
+            
+            showResults(correctAnswers, results);
+        }
+
+        // === MOSTRA RISULTATI ===
+        function showResults(correctAnswers, results) {
+            const percentage = Math.round((correctAnswers / selectedQuestions.length) * 100);
+            const passed = percentage >= 60;
+            
+            // Icona risultato
+            const resultIcon = document.getElementById('resultIcon');
+            resultIcon.innerHTML = passed 
+                ? '<svg class="w-20 h-20 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
+                : '<svg class="w-20 h-20 text-rosso" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+            
+            resultIcon.className = passed ? 'inline-block p-4 bg-green-500/20 rounded-full mb-4' : 'inline-block p-4 bg-rosso/20 rounded-full mb-4';
+            
+            // Testo risultato
+            document.getElementById('scoreText').textContent = `${correctAnswers} risposte corrette su ${selectedQuestions.length}`;
+            document.getElementById('percentageText').textContent = `${percentage}%`;
+            document.getElementById('percentageText').className = passed ? 'text-4xl font-bold text-green-500' : 'text-4xl font-bold text-rosso';
+            
+            // Lista risposte
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = results.map((r, idx) => `
+                <div class="glass-effect rounded-xl p-4 ${r.isCorrect ? 'border-l-4 border-green-500' : 'border-l-4 border-rosso'}">
+                    <div class="flex items-start gap-3 mb-2">
+                        <span class="text-2xl">${r.isCorrect ? '✅' : '❌'}</span>
+                        <div class="flex-1">
+                            <p class="text-white font-semibold mb-2">Domanda ${idx + 1}</p>
+                            <p class="text-grigio-chiaro text-sm mb-3">${r.question}</p>
+                            
+                            ${!r.isCorrect ? `
+                                <div class="space-y-2">
+                                    <div class="bg-rosso/20 rounded-lg p-3">
+                                        <p class="text-xs text-grigio-chiaro mb-1">La tua risposta:</p>
+                                        <p class="text-white text-sm">${r.userAnswer}</p>
+                                    </div>
+                                    <div class="bg-green-500/20 rounded-lg p-3">
+                                        <p class="text-xs text-grigio-chiaro mb-1">Risposta corretta:</p>
+                                        <p class="text-white text-sm">${r.correctAnswer}</p>
+                                    </div>
+                                </div>
+                            ` : `
+                                <div class="bg-green-500/20 rounded-lg p-3">
+                                    <p class="text-white text-sm">${r.correctAnswer}</p>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Mostra schermata risultati
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+        }
+
+        // === RESET QUIZ ===
         function resetQuiz() {
-            currentQuestion = 0;
-            userAnswers = Array(15).fill(null);
-            timeRemaining = 1800; // ✅ FIX: Reset timer completo
-            clearInterval(timerInterval);
-            document.getElementById('timer').classList.remove('text-red-500', 'animate-pulse');
-            document.getElementById('timer').textContent = '30:00'; // ✅ FIX: Reset display
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            timeRemaining = 1800;
+            stopTimer();
+            document.getElementById('timerDisplay').textContent = '30:00';
+            document.getElementById('timerDisplay').classList.remove('text-rosso', 'animate-pulse');
         }
 
         // === EVENT LISTENERS ===
-        document.getElementById('startQuizBtn').addEventListener('click', () => {
+        document.getElementById('startBtn').addEventListener('click', () => {
             selectedQuestions = selectRandomQuestions();
             resetQuiz();
             
-            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.remove('hidden');
             
             displayQuestion();
@@ -410,8 +1067,8 @@
         });
 
         document.getElementById('newQuizBtn').addEventListener('click', () => {
+            selectedQuestions = selectRandomQuestions();
             resetQuiz();
-            selectedQuestions = selectRandomQuestions(); // ✅ Nuove domande casuali
             
             document.getElementById('resultsScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.remove('hidden');
@@ -420,26 +1077,10 @@
             startTimer();
         });
 
-        // === TOUCH/SWIPE SUPPORT ===
-        let touchStartX = 0;
-        document.getElementById('quizContainer').addEventListener('touchstart', e => {
-            touchStartX = e.touches[0].clientX;
-        });
-        
-        document.getElementById('quizContainer').addEventListener('touchend', e => {
-            const touchEndX = e.changedTouches[0].clientX;
-            const swipeThreshold = 50;
-            
-            if (touchStartX - touchEndX > swipeThreshold && userAnswers[currentQuestion] !== null && currentQuestion < 14) {
-                nextQuestion();
-            }
-        });
-
-        // === PWA SERVICE WORKER ===
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:text/javascript,self.addEventListener("install", e => self.skipWaiting()); self.addEventListener("activate", e => self.clients.claim());')
-                .catch(() => {});
-        }
+        // === VERIFICA INTEGRITA' DATABASE ===
+        console.log(`✅ Database caricato: ${allQuestions.length} domande totali`);
+        console.log(`✅ Sistema pronto per generare quiz casuali di 15 domande`);
     </script>
 </body>
 </html>
+
