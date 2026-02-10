@@ -60,6 +60,20 @@
         
         <!-- START SCREEN -->
         <div id="startScreen" class="glass-effect rounded-2xl p-8 md:p-12 shadow-2xl animate-fade-in">
+            
+            <!-- PRESENTAZIONE -->
+            <div class="text-center mb-8 pb-8 border-b border-grigio-chiaro/20">
+                <div class="inline-block p-3 bg-arancione/20 rounded-full mb-4">
+                    <svg class="w-12 h-12 text-arancione" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white mb-2">Dott. Salvatore Trono</h2>
+                <p class="text-grigio-chiaro">Laureato in Servizi Giuridici per l'Impresa</p>
+                <p class="text-grigio-chiaro">Formatore • Esperto in Sicurezza sul Lavoro</p>
+            </div>
+
+            <!-- TITOLO PRINCIPALE -->
             <div class="text-center mb-8">
                 <div class="inline-block p-4 bg-arancione/20 rounded-full mb-4">
                     <svg class="w-16 h-16 text-arancione" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,6 +84,7 @@
                 <p class="text-xl text-grigio-chiaro mb-6">D.Lgs. 81/2008 - Testo Unico Sicurezza</p>
             </div>
             
+            <!-- CARATTERISTICHE TEST -->
             <div class="bg-grigio-scuro/50 rounded-xl p-6 mb-8 space-y-4">
                 <div class="flex items-start gap-3">
                     <span class="text-2xl">📝</span>
@@ -100,11 +115,58 @@
                     </div>
                 </div>
             </div>
+
+            <!-- DISCLAIMER -->
+            <div class="bg-rosso/10 border border-rosso/30 rounded-xl p-5 mb-8">
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <p class="text-white font-semibold mb-2">Disclaimer</p>
+                        <p class="text-grigio-chiaro text-sm leading-relaxed">
+                            Questo quiz ha finalità puramente didattiche e formative. 
+                            Non sostituisce la formazione obbligatoria prevista dal D.Lgs. 81/2008. 
+                            Consultare sempre fonti ufficiali e professionisti qualificati.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CREDITS -->
+            <div class="bg-grigio-scuro/30 rounded-xl p-5 mb-8">
+                <div class="flex items-start gap-3 mb-3">
+                    <span class="text-xl">📋</span>
+                    <p class="text-white font-semibold">Credits</p>
+                </div>
+                <div class="text-grigio-chiaro text-sm space-y-1 ml-9">
+                    <p>• Fonte normativa: <span class="text-white">D.Lgs. 81/2008</span></p>
+                    <p>• Database domande: <span class="text-white">Autoprodotto</span></p>
+                    <p>• Sviluppo: <span class="text-white">HTML5 / Tailwind CSS</span></p>
+                    <p>• Licenza: <span class="text-arancione font-semibold">⚠️ Vietato uso non autorizzato</span></p>
+                </div>
+            </div>
             
+            <!-- BOTTONE START -->
             <button id="startBtn" class="w-full bg-gradient-to-r from-arancione to-arancione-chiaro text-white text-xl font-bold py-4 px-8 rounded-xl hover:shadow-2xl hover:shadow-arancione/50 transition-all duration-300">
                 🚀 Inizia il Test
             </button>
         </div>
+
+        <!-- QUIZ SCREEN (placeholder - da implementare) -->
+        <div id="quizScreen" class="hidden glass-effect rounded-2xl p-8 shadow-2xl">
+            <p class="text-white text-center">Quiz in costruzione...</p>
+        </div>
+
+    </div>
+
+    <script>
+        // Gestione click bottone start
+        document.getElementById('startBtn').addEventListener('click', function() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
 
         <!-- QUIZ SCREEN -->
         <div id="quizScreen" class="hidden glass-effect rounded-2xl p-6 md:p-8 shadow-2xl">
